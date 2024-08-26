@@ -1,0 +1,61 @@
+[gd_scene load_steps=7 format=3 uid="uid://chdp0noq2yv3e"]
+
+[ext_resource type="Script" path="res://Scripts/Furniture.gd" id="1_by5uk"]
+[ext_resource type="PackedScene" uid="uid://cha007ja7ycyc" path="res://Audio/unbox_sound.tscn" id="2_3vo3i"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_qu24u"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_yu83c"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mix4p"]
+albedo_color = Color(0.523467, 0.411835, 0.286547, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qdd30"]
+size = Vector3(1, 1, 1.20984)
+
+[node name="Furniture" type="StaticBody3D" groups=["Furniture"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.715, 0, -1.026)
+script = ExtResource("1_by5uk")
+
+[node name="BoxMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.10065, 0, 0, 0, 1.10065, 0, 0, 0, 2.21532, 0, 0, 0.461651)
+mesh = SubResource("BoxMesh_qu24u")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.228413, 0, 0, 0.37386)
+mesh = SubResource("BoxMesh_yu83c")
+surface_material_override/0 = SubResource("StandardMaterial3D_mix4p")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.214553, 0, 0, 0, 1, 0, 0, 0, 0.976219, -0.387032, 0, -0.0932559)
+mesh = SubResource("BoxMesh_yu83c")
+surface_material_override/0 = SubResource("StandardMaterial3D_mix4p")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 1, -0.403147, -0.369715, 0.932145)
+mesh = SubResource("BoxMesh_yu83c")
+surface_material_override/0 = SubResource("StandardMaterial3D_mix4p")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 1, -0.403147, 0.398421, 0.932145)
+mesh = SubResource("BoxMesh_yu83c")
+surface_material_override/0 = SubResource("StandardMaterial3D_mix4p")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 1, 0.397172, 0.398421, 0.932145)
+mesh = SubResource("BoxMesh_yu83c")
+surface_material_override/0 = SubResource("StandardMaterial3D_mix4p")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 1, 0.397172, -0.399461, 0.932145)
+mesh = SubResource("BoxMesh_yu83c")
+surface_material_override/0 = SubResource("StandardMaterial3D_mix4p")
+
+[node name="MainCollision" type="CollisionShape3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.104919)
+shape = SubResource("BoxShape3D_qdd30")
+
+[node name="UnboxSound" parent="." instance=ExtResource("2_3vo3i")]
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]

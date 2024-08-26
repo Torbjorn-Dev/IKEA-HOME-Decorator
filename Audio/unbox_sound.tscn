@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cha007ja7ycyc"]
+
+[ext_resource type="AudioStream" uid="uid://dcq0misw6lw53" path="res://Audio/UnboxSound.mp3" id="1_825gc"]
+
+[node name="UnboxSound" type="AudioStreamPlayer"]
+stream = ExtResource("1_825gc")
+volume_db = -2.524
+mix_target = 2

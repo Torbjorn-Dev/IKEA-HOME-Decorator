@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cwvpjgkavhf3y"]
+
+[ext_resource type="AudioStream" uid="uid://d0mchw04nj5u8" path="res://Audio/Drillsound.mp3" id="1_lh3wm"]
+
+[node name="DrillSound" type="AudioStreamPlayer"]
+stream = ExtResource("1_lh3wm")
+volume_db = -7.495

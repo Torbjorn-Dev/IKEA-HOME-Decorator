@@ -1,0 +1,566 @@
+[gd_scene load_steps=41 format=3 uid="uid://dnxuu3dkhskjh"]
+
+[ext_resource type="Script" path="res://Scripts/Game.gd" id="1_oqn7b"]
+[ext_resource type="Script" path="res://Scripts/CameraController.gd" id="1_p2lkn"]
+[ext_resource type="Script" path="res://Scripts/Magazine.gd" id="2_5a8ov"]
+[ext_resource type="Script" path="res://Scripts/ScreenshotManager.gd" id="2_rq6pp"]
+[ext_resource type="AudioStream" uid="uid://d1rkiifhmga2c" path="res://Audio/MoveFurniture.wav" id="2_xxg07"]
+[ext_resource type="AudioStream" uid="uid://8tti61w20lql" path="res://Audio/RotateFurniture.wav" id="3_jcto0"]
+[ext_resource type="Script" path="res://Scripts/furnitureAD.gd" id="5_audft"]
+[ext_resource type="AudioStream" uid="uid://2mk7hs5txysv" path="res://Audio/camera-13695.mp3" id="5_hrn3r"]
+[ext_resource type="Texture2D" uid="uid://dto2vuusk3ikg" path="res://Sprites/camera_883787.png" id="7_1llxg"]
+[ext_resource type="Script" path="res://Scripts/DistanceSlider.gd" id="8_qrpck"]
+[ext_resource type="Script" path="res://Scripts/Instructions.gd" id="9_l2tuw"]
+[ext_resource type="AudioStream" uid="uid://bfycaohkitql4" path="res://Audio/IKEA HOME Decorator.wav" id="10_wh75m"]
+[ext_resource type="Texture2D" uid="uid://bwamap6o21w6v" path="res://Sprites/book_4257529.png" id="11_trpwq"]
+[ext_resource type="Texture2D" uid="uid://kbujm450jwwy" path="res://Sprites/magazine_4952798.png" id="12_745x1"]
+[ext_resource type="Texture2D" uid="uid://5h7gipagl7rj" path="res://Sprites/icons8-arrow-100.png" id="13_i12ht"]
+[ext_resource type="PackedScene" uid="uid://dxqkbgsncutys" path="res://Furniture/CoolChair.tscn" id="13_lag30"]
+[ext_resource type="AudioStream" uid="uid://brcrg8b3b0ktk" path="res://Audio/cash-register.mp3" id="14_0rp21"]
+[ext_resource type="Texture2D" uid="uid://borrsfs032jss" path="res://Sprites/Page1.png" id="14_rwnyn"]
+[ext_resource type="PackedScene" uid="uid://b7vg7ni3qinqi" path="res://Furniture/Shelve.tscn" id="15_ahjjr"]
+[ext_resource type="Texture2D" uid="uid://dh1pq43blk4y4" path="res://icon.svg" id="17_2g42m"]
+[ext_resource type="PackedScene" uid="uid://ce0an73r2hbjs" path="res://Furniture/Feely.tscn" id="17_gvx21"]
+[ext_resource type="Texture2D" uid="uid://cwpjdn4dspibu" path="res://Sprites/Page2.png" id="18_7o6sc"]
+[ext_resource type="PackedScene" uid="uid://dkeoom7hgs8iv" path="res://Furniture/Table.tscn" id="19_w12e5"]
+[ext_resource type="Texture2D" uid="uid://bn1e5rlfcoqa" path="res://Sprites/Page3.png" id="20_810cy"]
+[ext_resource type="PackedScene" uid="uid://cmvnbunn4xjth" path="res://Furniture/TV.tscn" id="20_r15l6"]
+[ext_resource type="PackedScene" uid="uid://xyafga4q3art" path="res://Furniture/TV Cupboard.tscn" id="22_x2j3v"]
+[ext_resource type="Texture2D" uid="uid://drtbdrqgqxrq7" path="res://Sprites/trash.png" id="26_s32uw"]
+
+[sub_resource type="Gradient" id="Gradient_bv63k"]
+colors = PackedColorArray(0.209474, 0.702878, 0.657802, 1, 0.829354, 0.991796, 0.969259, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_pfups"]
+gradient = SubResource("Gradient_bv63k")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x7lxx"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_aie3w"]
+material = SubResource("StandardMaterial3D_x7lxx")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_byji6"]
+size = Vector3(10, 0.235, 10)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4n1ma"]
+size = Vector3(0.5, 7.5, 10)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_r7wk5"]
+size = Vector3(10, 7.5, 0.5)
+
+[sub_resource type="LabelSettings" id="LabelSettings_lwj3r"]
+font_size = 20
+font_color = Color(0.54376, 0.694484, 0.792596, 1)
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_f6obk"]
+color = Color(0, 0.43231, 0.454753, 1)
+thickness = 7
+
+[sub_resource type="LabelSettings" id="LabelSettings_nx8yc"]
+font_size = 20
+font_color = Color(0.169245, 0.169245, 0.169245, 1)
+shadow_size = 5
+shadow_color = Color(0, 0, 0, 0.384314)
+shadow_offset = Vector2(-1, 1)
+
+[sub_resource type="Animation" id="Animation_0qbm6"]
+resource_name = "Guide_Arrow"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(100, 100), Vector2(120, 120)]
+}
+
+[sub_resource type="Animation" id="Animation_3b8ow"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(100, 100)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_g2vih"]
+_data = {
+"Guide_Arrow": SubResource("Animation_0qbm6"),
+"RESET": SubResource("Animation_3b8ow")
+}
+
+[node name="Game" type="Node3D"]
+script = ExtResource("1_oqn7b")
+
+[node name="SoundFX" type="Node3D" parent="."]
+
+[node name="MoveSound" type="AudioStreamPlayer" parent="SoundFX"]
+stream = ExtResource("2_xxg07")
+
+[node name="RotateSound" type="AudioStreamPlayer" parent="SoundFX"]
+stream = ExtResource("3_jcto0")
+volume_db = -9.369
+
+[node name="Music" type="AudioStreamPlayer" parent="SoundFX"]
+stream = ExtResource("10_wh75m")
+volume_db = -5.622
+autoplay = true
+
+[node name="Background" type="Sprite3D" parent="."]
+transform = Transform3D(-1.15217e-07, -820.777, 0.626401, 3.72768, -5.07382e-05, 0, 1.15217e-07, 820.777, 0.626401, -6.58, 0, -8.857)
+gi_mode = 0
+pixel_size = 0.1
+double_sided = false
+texture = SubResource("GradientTexture1D_pfups")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.707107, -0.454519, 0.541676, 0, 0.766045, 0.642787, -0.707107, -0.454519, 0.541676, 7, 11.787, 7)
+projection = 1
+size = 15.0
+script = ExtResource("1_p2lkn")
+
+[node name="Default Camera Position" type="Node3D" parent="."]
+
+[node name="Room" type="Node3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.125, 0)
+
+[node name="Floor" type="StaticBody3D" parent="Room"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Room/Floor"]
+transform = Transform3D(10, 0, 0, 0, 0.25, 0, 0, 0, 10, 0, 0, 0)
+mesh = SubResource("BoxMesh_aie3w")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Room/Floor"]
+shape = SubResource("BoxShape3D_byji6")
+
+[node name="Wall1" type="StaticBody3D" parent="Room"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 3.62919, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Room/Wall1"]
+transform = Transform3D(0.5, 0, 0, 0, 7.5, 0, 0, 0, 10, 0, 0, 0)
+mesh = SubResource("BoxMesh_aie3w")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Room/Wall1"]
+shape = SubResource("BoxShape3D_4n1ma")
+
+[node name="Wall2" type="StaticBody3D" parent="Room"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.62919, -5)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Room/Wall2"]
+transform = Transform3D(10, 0, 0, 0, 7.5, 0, 0, 0, 0.5, 0, 0, 0)
+mesh = SubResource("BoxMesh_aie3w")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Room/Wall2"]
+shape = SubResource("BoxShape3D_r7wk5")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.353553, 0.612372, 0, 0.866025, 0.5, -0.707107, -0.353553, 0.612372, 0, 6.61853, 0)
+light_energy = 1.2
+light_volumetric_fog_energy = 0.0
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Trashcan" type="TextureButton" parent="Control"]
+visible = false
+layout_mode = 0
+offset_left = -261.0
+offset_top = 175.0
+offset_right = -221.0
+offset_bottom = 215.0
+scale = Vector2(3.86964, 3.69337)
+texture_normal = ExtResource("26_s32uw")
+texture_pressed = ExtResource("26_s32uw")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Screenshot" type="Control" parent="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -577.0
+offset_top = -322.0
+offset_right = -577.0
+offset_bottom = -322.0
+mouse_filter = 2
+script = ExtResource("2_rq6pp")
+
+[node name="TextureButton" type="TextureButton" parent="Control/Screenshot"]
+layout_mode = 0
+offset_left = 171.0
+offset_top = 499.0
+offset_right = 683.0
+offset_bottom = 1011.0
+scale = Vector2(0.269058, 0.261146)
+focus_mode = 0
+texture_normal = ExtResource("7_1llxg")
+texture_pressed = ExtResource("7_1llxg")
+stretch_mode = 4
+
+[node name="ScreenshotText" type="Label" parent="Control/Screenshot"]
+visible = false
+layout_mode = 0
+offset_left = 226.0
+offset_top = 305.0
+offset_right = 476.0
+offset_bottom = 340.0
+text = "Screenshot saved to "
+label_settings = SubResource("LabelSettings_lwj3r")
+horizontal_alignment = 1
+
+[node name="Timer" type="Timer" parent="Control/Screenshot"]
+wait_time = 3.0
+
+[node name="ShutterSound" type="AudioStreamPlayer" parent="Control/Screenshot"]
+stream = ExtResource("5_hrn3r")
+
+[node name="Furniture Distance" type="Control" parent="Control"]
+anchors_preset = 0
+offset_left = -577.0
+offset_top = -322.0
+offset_right = -537.0
+offset_bottom = -282.0
+script = ExtResource("8_qrpck")
+
+[node name="HSlider" type="HSlider" parent="Control/Furniture Distance"]
+layout_mode = 0
+offset_left = 764.0
+offset_top = 581.0
+offset_right = 1124.0
+offset_bottom = 624.0
+focus_mode = 0
+theme_override_styles/slider = SubResource("StyleBoxLine_f6obk")
+min_value = 0.05
+max_value = 1.0
+step = 0.05
+value = 0.5
+scrollable = false
+
+[node name="Furniture Distance Label" type="Label" parent="Control/Furniture Distance"]
+layout_mode = 0
+offset_left = 852.0
+offset_top = 568.0
+offset_right = 1013.0
+offset_bottom = 591.0
+text = "Movement Distance"
+
+[node name="Instructions" type="Control" parent="Control"]
+anchors_preset = 0
+offset_left = -45.0
+offset_top = -38.0
+offset_right = -5.0
+offset_bottom = 2.0
+script = ExtResource("9_l2tuw")
+
+[node name="InstructionMenu" type="Control" parent="Control/Instructions"]
+visible = false
+anchors_preset = 0
+offset_left = -516.0
+offset_top = -267.0
+offset_right = -476.0
+offset_bottom = -227.0
+
+[node name="Background" type="ColorRect" parent="Control/Instructions/InstructionMenu"]
+layout_mode = 0
+offset_left = -91.0
+offset_top = -83.0
+offset_right = -51.0
+offset_bottom = -43.0
+scale = Vector2(33.2314, 20.0275)
+color = Color(0, 0, 0, 0.6)
+
+[node name="Paper2" type="ColorRect" parent="Control/Instructions/InstructionMenu"]
+layout_mode = 0
+offset_left = 389.0
+offset_top = 59.0
+offset_right = 429.0
+offset_bottom = 99.0
+scale = Vector2(8.13455, 11.5984)
+color = Color(0.609329, 0.609331, 0.60933, 1)
+
+[node name="Paper" type="ColorRect" parent="Control/Instructions/InstructionMenu"]
+layout_mode = 0
+offset_left = 396.0
+offset_top = 51.0
+offset_right = 436.0
+offset_bottom = 91.0
+scale = Vector2(8.29455, 11.5984)
+color = Color(0.920995, 0.920995, 0.920995, 1)
+
+[node name="Label" type="Label" parent="Control/Instructions/InstructionMenu"]
+layout_mode = 0
+offset_left = 399.0
+offset_top = 51.0
+offset_right = 724.0
+offset_bottom = 513.0
+text = "Use the magazine to 
+order furniture.
+
+Left-Click on furniture to focus on
+it, and Right-Click to unfocus.
+
+Use WASD, Space, Left Control
+and the arrow keys to move and
+rotate focused furniture.
+
+You can zoom in and out using
+the mousewheel
+
+Decorate your room
+and take screenshots!"
+label_settings = SubResource("LabelSettings_nx8yc")
+
+[node name="TextureButton" type="TextureButton" parent="Control/Instructions"]
+layout_mode = 0
+offset_left = -516.0
+offset_top = -267.0
+offset_right = -4.0
+offset_bottom = 245.0
+scale = Vector2(0.17742, 0.184196)
+focus_mode = 0
+texture_normal = ExtResource("11_trpwq")
+texture_pressed = ExtResource("11_trpwq")
+stretch_mode = 4
+
+[node name="GuideArrow" type="TextureRect" parent="Control/Instructions"]
+layout_mode = 0
+offset_left = -405.0
+offset_top = -47.0
+offset_right = -305.0
+offset_bottom = 53.0
+rotation = -2.29474
+texture = ExtResource("13_i12ht")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Control/Instructions/GuideArrow"]
+libraries = {
+"": SubResource("AnimationLibrary_g2vih")
+}
+autoplay = "Guide_Arrow"
+
+[node name="Magazine" type="Control" parent="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -577.0
+offset_top = -322.0
+offset_right = 577.0
+offset_bottom = 325.0
+mouse_filter = 2
+script = ExtResource("2_5a8ov")
+
+[node name="MagazineMenu" type="Control" parent="Control/Magazine"]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Background" type="ColorRect" parent="Control/Magazine/MagazineMenu"]
+layout_mode = 0
+offset_left = -91.0
+offset_top = -83.0
+offset_right = -51.0
+offset_bottom = -43.0
+scale = Vector2(33.2314, 20.0275)
+color = Color(0, 0, 0, 0.6)
+
+[node name="Pages" type="Control" parent="Control/Magazine/MagazineMenu"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Page1" type="TextureRect" parent="Control/Magazine/MagazineMenu/Pages"]
+layout_mode = 0
+offset_left = 148.0
+offset_top = 17.0
+offset_right = 989.0
+offset_bottom = 611.0
+texture = ExtResource("14_rwnyn")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="TextureButton" type="TextureButton" parent="Control/Magazine/MagazineMenu/Pages/Page1"]
+layout_mode = 0
+offset_top = 20.0
+offset_right = 128.0
+offset_bottom = 148.0
+scale = Vector2(3.29494, 4.4434)
+focus_mode = 0
+stretch_mode = 0
+script = ExtResource("5_audft")
+furniture_type = ExtResource("13_lag30")
+
+[node name="TextureButton2" type="TextureButton" parent="Control/Magazine/MagazineMenu/Pages/Page1"]
+layout_mode = 0
+offset_left = 422.0
+offset_top = 14.0
+offset_right = 550.0
+offset_bottom = 142.0
+scale = Vector2(3.27902, 4.49461)
+focus_mode = 0
+stretch_mode = 0
+script = ExtResource("5_audft")
+furniture_type = ExtResource("15_ahjjr")
+
+[node name="NextButton" type="TextureButton" parent="Control/Magazine/MagazineMenu/Pages/Page1"]
+layout_mode = 0
+offset_left = 845.0
+offset_top = 278.0
+offset_right = 973.0
+offset_bottom = 345.0
+texture_normal = ExtResource("17_2g42m")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Page2" type="TextureRect" parent="Control/Magazine/MagazineMenu/Pages"]
+visible = false
+layout_mode = 0
+offset_left = 148.0
+offset_top = 17.0
+offset_right = 989.0
+offset_bottom = 611.0
+texture = ExtResource("18_7o6sc")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="TextureButton" type="TextureButton" parent="Control/Magazine/MagazineMenu/Pages/Page2"]
+layout_mode = 0
+offset_top = 20.0
+offset_right = 128.0
+offset_bottom = 148.0
+scale = Vector2(3.29494, 4.4434)
+focus_mode = 0
+stretch_mode = 0
+script = ExtResource("5_audft")
+furniture_type = ExtResource("19_w12e5")
+
+[node name="TextureButton2" type="TextureButton" parent="Control/Magazine/MagazineMenu/Pages/Page2"]
+layout_mode = 0
+offset_left = 422.0
+offset_top = 14.0
+offset_right = 550.0
+offset_bottom = 142.0
+scale = Vector2(3.27902, 4.49461)
+focus_mode = 0
+stretch_mode = 0
+script = ExtResource("5_audft")
+furniture_type = ExtResource("20_r15l6")
+
+[node name="BackButton" type="TextureButton" parent="Control/Magazine/MagazineMenu/Pages/Page2"]
+layout_mode = 0
+offset_left = -132.0
+offset_top = 278.0
+offset_right = -4.0
+offset_bottom = 345.0
+texture_normal = ExtResource("17_2g42m")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="NextButton" type="TextureButton" parent="Control/Magazine/MagazineMenu/Pages/Page2"]
+layout_mode = 0
+offset_left = 845.0
+offset_top = 278.0
+offset_right = 973.0
+offset_bottom = 345.0
+texture_normal = ExtResource("17_2g42m")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Page3" type="TextureRect" parent="Control/Magazine/MagazineMenu/Pages"]
+visible = false
+layout_mode = 0
+offset_left = 148.0
+offset_top = 17.0
+offset_right = 989.0
+offset_bottom = 611.0
+texture = ExtResource("20_810cy")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="TextureButton" type="TextureButton" parent="Control/Magazine/MagazineMenu/Pages/Page3"]
+layout_mode = 0
+offset_top = 20.0
+offset_right = 128.0
+offset_bottom = 148.0
+scale = Vector2(3.29494, 4.4434)
+focus_mode = 0
+stretch_mode = 0
+script = ExtResource("5_audft")
+furniture_type = ExtResource("22_x2j3v")
+
+[node name="TextureButton2" type="TextureButton" parent="Control/Magazine/MagazineMenu/Pages/Page3"]
+layout_mode = 0
+offset_left = 422.0
+offset_top = 14.0
+offset_right = 550.0
+offset_bottom = 142.0
+scale = Vector2(3.27902, 4.49461)
+focus_mode = 0
+stretch_mode = 0
+script = ExtResource("5_audft")
+furniture_type = ExtResource("17_gvx21")
+
+[node name="BackButton" type="TextureButton" parent="Control/Magazine/MagazineMenu/Pages/Page3"]
+layout_mode = 0
+offset_left = -132.0
+offset_top = 278.0
+offset_right = -4.0
+offset_bottom = 345.0
+texture_normal = ExtResource("17_2g42m")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="TextureButton" type="TextureButton" parent="Control/Magazine"]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 500.0
+offset_right = 527.0
+offset_bottom = 1012.0
+scale = Vector2(0.239999, 0.264876)
+focus_mode = 0
+texture_normal = ExtResource("12_745x1")
+texture_pressed = ExtResource("12_745x1")
+stretch_mode = 4
+
+[node name="PurchaseSound" type="AudioStreamPlayer" parent="Control/Magazine"]
+stream = ExtResource("14_0rp21")
+
+[connection signal="pressed" from="Control/Trashcan" to="." method="_on_trashcan_pressed"]
+[connection signal="pressed" from="Control/Screenshot/TextureButton" to="Control/Screenshot" method="_on_texture_button_pressed"]
+[connection signal="timeout" from="Control/Screenshot/Timer" to="Control/Screenshot" method="_on_timer_timeout"]
+[connection signal="pressed" from="Control/Instructions/TextureButton" to="Control/Instructions" method="_on_texture_button_pressed"]
+[connection signal="order_furniture" from="Control/Magazine/MagazineMenu/Pages/Page1/TextureButton" to="Control/Magazine" method="_on_texture_button_order_furniture"]
+[connection signal="pressed" from="Control/Magazine/MagazineMenu/Pages/Page1/TextureButton" to="Control/Magazine/MagazineMenu/Pages/Page1/TextureButton" method="_on_pressed"]
+[connection signal="order_furniture" from="Control/Magazine/MagazineMenu/Pages/Page1/TextureButton2" to="Control/Magazine" method="_on_texture_button_order_furniture"]
+[connection signal="pressed" from="Control/Magazine/MagazineMenu/Pages/Page1/TextureButton2" to="Control/Magazine/MagazineMenu/Pages/Page1/TextureButton2" method="_on_pressed"]
+[connection signal="pressed" from="Control/Magazine/MagazineMenu/Pages/Page1/NextButton" to="Control/Magazine" method="_on_next_button_pressed"]
+[connection signal="order_furniture" from="Control/Magazine/MagazineMenu/Pages/Page2/TextureButton" to="Control/Magazine" method="_on_texture_button_order_furniture"]
+[connection signal="pressed" from="Control/Magazine/MagazineMenu/Pages/Page2/TextureButton" to="Control/Magazine/MagazineMenu/Pages/Page2/TextureButton" method="_on_pressed"]
+[connection signal="order_furniture" from="Control/Magazine/MagazineMenu/Pages/Page2/TextureButton2" to="Control/Magazine" method="_on_texture_button_order_furniture"]
+[connection signal="pressed" from="Control/Magazine/MagazineMenu/Pages/Page2/TextureButton2" to="Control/Magazine/MagazineMenu/Pages/Page2/TextureButton2" method="_on_pressed"]
+[connection signal="pressed" from="Control/Magazine/MagazineMenu/Pages/Page2/BackButton" to="Control/Magazine" method="_on_back_button_pressed"]
+[connection signal="pressed" from="Control/Magazine/MagazineMenu/Pages/Page2/NextButton" to="Control/Magazine" method="_on_next_button_pressed"]
+[connection signal="order_furniture" from="Control/Magazine/MagazineMenu/Pages/Page3/TextureButton" to="Control/Magazine" method="_on_texture_button_order_furniture"]
+[connection signal="pressed" from="Control/Magazine/MagazineMenu/Pages/Page3/TextureButton" to="Control/Magazine/MagazineMenu/Pages/Page3/TextureButton" method="_on_pressed"]
+[connection signal="order_furniture" from="Control/Magazine/MagazineMenu/Pages/Page3/TextureButton2" to="Control/Magazine" method="_on_texture_button_order_furniture"]
+[connection signal="pressed" from="Control/Magazine/MagazineMenu/Pages/Page3/TextureButton2" to="Control/Magazine/MagazineMenu/Pages/Page3/TextureButton2" method="_on_pressed"]
+[connection signal="pressed" from="Control/Magazine/MagazineMenu/Pages/Page3/BackButton" to="Control/Magazine" method="_on_back_button_pressed"]
+[connection signal="pressed" from="Control/Magazine/TextureButton" to="Control/Magazine" method="_on_texture_button_pressed"]

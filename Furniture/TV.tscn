@@ -1,0 +1,65 @@
+[gd_scene load_steps=11 format=3 uid="uid://cmvnbunn4xjth"]
+
+[ext_resource type="Script" path="res://Scripts/Furniture.gd" id="1_xmcet"]
+[ext_resource type="PackedScene" uid="uid://cha007ja7ycyc" path="res://Audio/unbox_sound.tscn" id="5_0r813"]
+[ext_resource type="PackedScene" uid="uid://cwvpjgkavhf3y" path="res://Audio/drill_sound.tscn" id="6_g4nnr"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v7gup"]
+albedo_color = Color(0.427453, 0.33773, 0.228415, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ne52k"]
+material = SubResource("StandardMaterial3D_v7gup")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ige5g"]
+albedo_color = Color(0.212305, 0.212305, 0.212305, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_xte2b"]
+material = SubResource("StandardMaterial3D_ige5g")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ach1h"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_84tor"]
+material = SubResource("StandardMaterial3D_ach1h")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fodde"]
+size = Vector3(0.358802, 1.40549, 2.33911)
+
+[node name="TV" type="StaticBody3D"]
+script = ExtResource("1_xmcet")
+
+[node name="BoxMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.580136, 0, 0, 0, 1.45876, 0, 0, 0, 2.62178, 0.00204347, 0.637246, 0.0308875)
+mesh = SubResource("BoxMesh_ne52k")
+
+[node name="Label3D" type="Label3D" parent="BoxMesh"]
+transform = Transform3D(1.52854e-15, -3.90388, -4.37114e-08, -3.4969e-08, -1.70644e-07, 1, -0.799996, 0, -4.37114e-08, 0, 0.508312, 0)
+text = "Cardboard box"
+
+[node name="TV" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.0718314, 0, 0, 0, 1.33875, 0, 0, 0, 2.30717, 0.00833448, 0.656051, 0)
+mesh = SubResource("BoxMesh_xte2b")
+
+[node name="Screen" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.0264837, 0, 0, 0, 1.26221, 0, 0, 0, 2.23014, 0.0346108, 0.660013, 0)
+mesh = SubResource("BoxMesh_84tor")
+
+[node name="Stand1" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.451244, 0, 0, 0, 0.0546225, 0, 0, 0, 0.134394, 0.00725483, -0.0274305, 0.912611)
+mesh = SubResource("BoxMesh_84tor")
+
+[node name="Stand2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.451244, 0, 0, 0, 0.0546225, 0, 0, 0, 0.134394, 0.00725483, -0.0274305, -0.887219)
+mesh = SubResource("BoxMesh_84tor")
+
+[node name="MainCollision" type="CollisionShape3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0267574, 0.650466, -0.00396731)
+shape = SubResource("BoxShape3D_fodde")
+
+[node name="UnboxSound" parent="." instance=ExtResource("5_0r813")]
+
+[node name="DrillSound" parent="." instance=ExtResource("6_g4nnr")]
+
+[connection signal="furniture_clicked" from="." to="." method="_on_furniture_clicked"]
+[connection signal="input_event" from="." to="." method="_on_input_event"]

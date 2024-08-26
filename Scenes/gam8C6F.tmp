@@ -1,0 +1,141 @@
+[gd_scene load_steps=14 format=3 uid="uid://dnxuu3dkhskjh"]
+
+[ext_resource type="Texture2D" uid="uid://dh1pq43blk4y4" path="res://icon.svg" id="1_da14t"]
+[ext_resource type="Script" path="res://Scripts/Game.gd" id="1_oqn7b"]
+[ext_resource type="Script" path="res://Scripts/CameraController.gd" id="1_p2lkn"]
+[ext_resource type="Script" path="res://Scripts/Magazine.gd" id="2_5a8ov"]
+[ext_resource type="Script" path="res://Scripts/ScreenshotManager.gd" id="2_rq6pp"]
+[ext_resource type="Script" path="res://Scripts/Furniture.gd" id="5_etut3"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_aie3w"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_byji6"]
+size = Vector3(10, 0.235, 10)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4n1ma"]
+size = Vector3(0.5, 7.5, 10)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_r7wk5"]
+size = Vector3(10, 7.5, 0.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_yu83c"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mix4p"]
+albedo_color = Color(0.523467, 0.411835, 0.286547, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qdd30"]
+
+[node name="Game" type="Node3D"]
+script = ExtResource("1_oqn7b")
+
+[node name="Camera" type="Node3D" parent="."]
+script = ExtResource("1_p2lkn")
+
+[node name="Camera3D" type="Camera3D" parent="Camera"]
+transform = Transform3D(0.707107, -0.454519, 0.541675, 0, 0.766045, 0.642787, -0.707107, -0.454519, 0.541675, 7, 11.7873, 7)
+projection = 1
+size = 15.0
+
+[node name="DefaultPosition" type="Node3D" parent="Camera"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 11.7873, 7)
+
+[node name="Magazine" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1154.0
+offset_bottom = 647.0
+mouse_filter = 2
+script = ExtResource("2_5a8ov")
+
+[node name="TextureButton" type="TextureButton" parent="Magazine"]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 500.0
+offset_right = 143.0
+offset_bottom = 628.0
+texture_normal = ExtResource("1_da14t")
+texture_pressed = ExtResource("1_da14t")
+stretch_mode = 0
+
+[node name="Room" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.125, 0)
+
+[node name="Floor" type="StaticBody3D" parent="Room"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Room/Floor"]
+transform = Transform3D(10, 0, 0, 0, 0.25, 0, 0, 0, 10, 0, 0, 0)
+mesh = SubResource("BoxMesh_aie3w")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Room/Floor"]
+shape = SubResource("BoxShape3D_byji6")
+
+[node name="Wall1" type="StaticBody3D" parent="Room"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 3.62919, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Room/Wall1"]
+transform = Transform3D(0.5, 0, 0, 0, 7.5, 0, 0, 0, 10, 0, 0, 0)
+mesh = SubResource("BoxMesh_aie3w")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Room/Wall1"]
+shape = SubResource("BoxShape3D_4n1ma")
+
+[node name="Wall2" type="StaticBody3D" parent="Room"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.62919, -5)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Room/Wall2"]
+transform = Transform3D(10, 0, 0, 0, 7.5, 0, 0, 0, 0.5, 0, 0, 0)
+mesh = SubResource("BoxMesh_aie3w")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Room/Wall2"]
+shape = SubResource("BoxShape3D_r7wk5")
+
+[node name="Furniture" type="Node3D" parent="Room"]
+
+[node name="Furniture" type="StaticBody3D" parent="Room/Furniture" groups=["Furniture"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.71486, 0.18468, -1.02624)
+script = ExtResource("5_etut3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Room/Furniture/Furniture"]
+mesh = SubResource("BoxMesh_yu83c")
+surface_material_override/0 = SubResource("StandardMaterial3D_mix4p")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Room/Furniture/Furniture"]
+transform = Transform3D(0.352543, 0, 0, 0, 0.399591, 0, 0, 0, 1, 0, 0, 0.751613)
+mesh = SubResource("BoxMesh_yu83c")
+surface_material_override/0 = SubResource("StandardMaterial3D_mix4p")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Room/Furniture/Furniture"]
+shape = SubResource("BoxShape3D_qdd30")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.353553, 0.612372, 0, 0.866025, 0.5, -0.707107, -0.353553, 0.612372, 0, 6.61853, 0)
+
+[node name="ScreenshotManager" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+script = ExtResource("2_rq6pp")
+
+[node name="TextureButton" type="TextureButton" parent="ScreenshotManager"]
+layout_mode = 0
+offset_left = 997.0
+offset_top = 499.0
+offset_right = 1125.0
+offset_bottom = 627.0
+texture_normal = ExtResource("1_da14t")
+texture_pressed = ExtResource("1_da14t")
+
+[node name="ScreenshotText" type="Label" parent="ScreenshotManager"]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Screenshot saved to "
+
+[connection signal="pressed" from="Magazine/TextureButton" to="Magazine" method="_on_texture_button_pressed"]
+[connection signal="furniture_clicked" from="Room/Furniture/Furniture" to="." method="_on_furniture_furniture_clicked"]
+[connection signal="input_event" from="Room/Furniture/Furniture" to="Room/Furniture/Furniture" method="_on_input_event"]
+[connection signal="mouse_entered" from="Room/Furniture/Furniture" to="." method="_on_test_furniture_mouse_entered"]
+[connection signal="pressed" from="ScreenshotManager/TextureButton" to="ScreenshotManager" method="_on_texture_button_pressed"]

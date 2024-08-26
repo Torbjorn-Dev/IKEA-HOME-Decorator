@@ -1,0 +1,95 @@
+[gd_scene load_steps=7 format=3 uid="uid://dnxuu3dkhskjh"]
+
+[ext_resource type="Texture2D" uid="uid://dh1pq43blk4y4" path="res://icon.svg" id="1_da14t"]
+[ext_resource type="Script" path="res://Scripts/ScreenshotManager.gd" id="2_rq6pp"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_aie3w"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_byji6"]
+size = Vector3(10, 0.235, 10)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4n1ma"]
+size = Vector3(0.5, 7.5, 10)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_r7wk5"]
+size = Vector3(10, 7.5, 0.5)
+
+[node name="Game" type="Node3D"]
+
+[node name="Magazine" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1154.0
+offset_bottom = 647.0
+
+[node name="TextureButton" type="TextureButton" parent="Magazine"]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 500.0
+offset_right = 143.0
+offset_bottom = 628.0
+texture_normal = ExtResource("1_da14t")
+texture_pressed = ExtResource("1_da14t")
+stretch_mode = 0
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.707107, -0.454519, 0.541675, 0, 0.766044, 0.642788, -0.707107, -0.454519, 0.541675, 7, 9, 7)
+
+[node name="Room" type="Node3D" parent="."]
+
+[node name="Floor" type="StaticBody3D" parent="Room"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Room/Floor"]
+transform = Transform3D(10, 0, 0, 0, 0.25, 0, 0, 0, 10, 0, 0, 0)
+mesh = SubResource("BoxMesh_aie3w")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Room/Floor"]
+shape = SubResource("BoxShape3D_byji6")
+
+[node name="Wall1" type="StaticBody3D" parent="Room"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 3.62919, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Room/Wall1"]
+transform = Transform3D(0.5, 0, 0, 0, 7.5, 0, 0, 0, 10, 0, 0, 0)
+mesh = SubResource("BoxMesh_aie3w")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Room/Wall1"]
+shape = SubResource("BoxShape3D_4n1ma")
+
+[node name="Wall2" type="StaticBody3D" parent="Room"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.62919, -5)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Room/Wall2"]
+transform = Transform3D(10, 0, 0, 0, 7.5, 0, 0, 0, 0.5, 0, 0, 0)
+mesh = SubResource("BoxMesh_aie3w")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Room/Wall2"]
+shape = SubResource("BoxShape3D_r7wk5")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.353553, 0.612372, 0, 0.866025, 0.5, -0.707107, -0.353553, 0.612372, 0, 6.61853, 0)
+
+[node name="ScreenshotManager" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_rq6pp")
+
+[node name="TextureButton" type="TextureButton" parent="ScreenshotManager"]
+layout_mode = 0
+offset_left = 997.0
+offset_top = 499.0
+offset_right = 1125.0
+offset_bottom = 627.0
+texture_normal = ExtResource("1_da14t")
+texture_pressed = ExtResource("1_da14t")
+
+[node name="ScreenshotText" type="Label" parent="ScreenshotManager"]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Screenshot saved to "
+
+[connection signal="pressed" from="ScreenshotManager/TextureButton" to="ScreenshotManager" method="_on_texture_button_pressed"]

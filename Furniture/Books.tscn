@@ -1,0 +1,73 @@
+[gd_scene load_steps=15 format=3 uid="uid://bksp81q772rve"]
+
+[ext_resource type="Script" path="res://Scripts/Furniture.gd" id="1_hspks"]
+[ext_resource type="PackedScene" uid="uid://cha007ja7ycyc" path="res://Audio/unbox_sound.tscn" id="3_dmwob"]
+[ext_resource type="PackedScene" uid="uid://cwvpjgkavhf3y" path="res://Audio/drill_sound.tscn" id="4_jhyqk"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v7gup"]
+albedo_color = Color(0.427453, 0.33773, 0.228415, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ne52k"]
+material = SubResource("StandardMaterial3D_v7gup")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v4qed"]
+albedo_color = Color(0.405459, 0.490302, 0.342306, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_3yrbx"]
+material = SubResource("StandardMaterial3D_v4qed")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7hspd"]
+albedo_color = Color(0.886275, 0.682353, 0.380392, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_4hjwt"]
+material = SubResource("StandardMaterial3D_7hspd")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8tp5l"]
+albedo_color = Color(0.701002, 0.413325, 0.499872, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_38ag2"]
+material = SubResource("StandardMaterial3D_8tp5l")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qp4to"]
+albedo_color = Color(0.269976, 0.706313, 0.663585, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_uawnx"]
+material = SubResource("StandardMaterial3D_qp4to")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fodde"]
+size = Vector3(0.264775, 0.452811, 0.293659)
+
+[node name="Books" type="StaticBody3D"]
+script = ExtResource("1_hspks")
+
+[node name="BoxMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.378082, 0, 0, 0, 0.492203, 0, 0, 0, 0.356305, -0.0143165, 0.122585, 0.0135821)
+mesh = SubResource("BoxMesh_ne52k")
+
+[node name="Book1" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.345192, 0, 0, 0, 0.448929, 0, 0, 0, 0.0676623, -0.0151203, 0.122782, -0.00164504)
+mesh = SubResource("BoxMesh_3yrbx")
+
+[node name="Book2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.345192, 0, 0, 0, 0.448929, 0, 0, 0, 0.0676623, -0.0151203, 0.122782, 0.0699081)
+mesh = SubResource("BoxMesh_4hjwt")
+
+[node name="Book3" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.345192, 0, 0, 0, 0.448929, 0, 0, 0, 0.0676623, -0.0151203, 0.122782, 0.140699)
+mesh = SubResource("BoxMesh_38ag2")
+
+[node name="Book4" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.345192, 0, 0, 0, 0.445947, -0.00778631, 0, 0.0516609, 0.0672129, -0.0151203, 0.122782, -0.0958711)
+mesh = SubResource("BoxMesh_uawnx")
+
+[node name="MainCollision" type="CollisionShape3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0133948, 0.122968, 0.0324406)
+shape = SubResource("BoxShape3D_fodde")
+
+[node name="UnboxSound" parent="." instance=ExtResource("3_dmwob")]
+
+[node name="DrillSound" parent="." instance=ExtResource("4_jhyqk")]
+
+[connection signal="furniture_clicked" from="." to="." method="_on_furniture_clicked"]
+[connection signal="input_event" from="." to="." method="_on_input_event"]

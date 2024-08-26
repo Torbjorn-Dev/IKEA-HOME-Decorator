@@ -1,0 +1,45 @@
+[gd_scene load_steps=8 format=3 uid="uid://ce0an73r2hbjs"]
+
+[ext_resource type="Script" path="res://Scripts/Furniture.gd" id="1_iqw8c"]
+[ext_resource type="PackedScene" uid="uid://cdk4boywtynbb" path="res://Models/felly.fbx" id="2_d6a5i"]
+[ext_resource type="PackedScene" uid="uid://cha007ja7ycyc" path="res://Audio/unbox_sound.tscn" id="5_bklqf"]
+[ext_resource type="PackedScene" uid="uid://cwvpjgkavhf3y" path="res://Audio/drill_sound.tscn" id="6_27wmy"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v7gup"]
+albedo_color = Color(0.427453, 0.33773, 0.228415, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ne52k"]
+material = SubResource("StandardMaterial3D_v7gup")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fodde"]
+size = Vector3(0.390155, 0.349293, 0.798405)
+
+[node name="Feely" type="StaticBody3D"]
+script = ExtResource("1_iqw8c")
+
+[node name="BoxMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.383307, 0, 0, 0, 0.356838, 0, 0, 0, 0.803465, -0.024647, 0.145371, 0.105972)
+mesh = SubResource("BoxMesh_ne52k")
+
+[node name="Label3D" type="Label3D" parent="BoxMesh"]
+transform = Transform3D(1.73828e-15, -3.1135, -4.37114e-08, -3.97674e-08, -1.36096e-07, 1, -0.909773, 0, -4.37114e-08, 0, 0.508312, 0)
+text = "FEELY INSIDE"
+
+[node name="Label3D2" type="Label3D" parent="BoxMesh"]
+transform = Transform3D(-5.07144e-08, -1.77073e-14, 1, -7.85089e-15, 1.38634, 1.02644e-14, -1.16021, -2.02723e-22, -4.37116e-08, 0.500899, -0.285429, 0.171056)
+text = "Fragile"
+
+[node name="Root Scene" parent="." instance=ExtResource("2_d6a5i")]
+transform = Transform3D(-0.120957, 1.05744e-08, 4.62223e-16, 0, -5.28721e-09, 0.120957, 1.05744e-08, 0.120957, 5.28721e-09, -0.031622, 0.1562, 0.20417)
+
+[node name="MainCollision" type="CollisionShape3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0230971, 0.143789, 0.105132)
+shape = SubResource("BoxShape3D_fodde")
+
+[node name="UnboxSound" parent="." instance=ExtResource("5_bklqf")]
+
+[node name="DrillSound" parent="." instance=ExtResource("6_27wmy")]
+
+[connection signal="furniture_clicked" from="." to="." method="_on_furniture_clicked"]
+[connection signal="input_event" from="." to="." method="_on_input_event"]

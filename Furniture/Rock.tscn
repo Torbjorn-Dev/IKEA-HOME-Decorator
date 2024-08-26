@@ -1,0 +1,49 @@
+[gd_scene load_steps=8 format=3 uid="uid://cnwf4edaiefkb"]
+
+[ext_resource type="Script" path="res://Scripts/Furniture.gd" id="1_te875"]
+[ext_resource type="ArrayMesh" uid="uid://ctjcuh1jb7yij" path="res://Models/RadRock.res" id="2_0gijb"]
+[ext_resource type="PackedScene" uid="uid://cha007ja7ycyc" path="res://Audio/unbox_sound.tscn" id="3_m38lv"]
+[ext_resource type="PackedScene" uid="uid://cwvpjgkavhf3y" path="res://Audio/drill_sound.tscn" id="4_htpbw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v7gup"]
+albedo_color = Color(0.427453, 0.33773, 0.228415, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ne52k"]
+material = SubResource("StandardMaterial3D_v7gup")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fodde"]
+size = Vector3(0.89006, 0.583356, 0.971696)
+
+[node name="Rock" type="StaticBody3D"]
+script = ExtResource("1_te875")
+
+[node name="BoxMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.962663, 0, 0, 0, 0.645402, 0, 0, 0, 1.01605, -0.0550213, 0.136259, -0.0185622)
+mesh = SubResource("BoxMesh_ne52k")
+
+[node name="Label3D" type="Label3D" parent="BoxMesh"]
+transform = Transform3D(1.29804e-15, -2.41163, -4.37114e-08, -2.96958e-08, -1.05416e-07, 1, -0.679361, 0, -4.37114e-08, 0, 0.508312, 0)
+text = "ROCK AND STONE"
+
+[node name="Label3D2" type="Label3D" parent="BoxMesh"]
+transform = Transform3D(-4.79361e-08, -2.25611e-14, 1, -7.42079e-15, 1.76636, 1.02644e-14, -1.09665, -2.58292e-22, -4.37116e-08, 0.500899, -0.245312, -0.000653658)
+text = "Not Fragile"
+
+[node name="RockMesh" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.11827, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RockMesh"]
+transform = Transform3D(0.388195, 0, 0, 0, 0.389943, 0, 0, 0, 0.438574, -0.0708975, 0, 0)
+mesh = ExtResource("2_0gijb")
+
+[node name="MainCollision" type="CollisionShape3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0503966, 0.139098, -0.0193716)
+shape = SubResource("BoxShape3D_fodde")
+
+[node name="UnboxSound" parent="." instance=ExtResource("3_m38lv")]
+
+[node name="DrillSound" parent="." instance=ExtResource("4_htpbw")]
+
+[connection signal="furniture_clicked" from="." to="." method="_on_furniture_clicked"]
+[connection signal="input_event" from="." to="." method="_on_input_event"]

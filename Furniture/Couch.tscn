@@ -1,0 +1,158 @@
+[gd_scene load_steps=16 format=3 uid="uid://5fwehp2ny07h"]
+
+[ext_resource type="Script" path="res://Scripts/Furniture.gd" id="1_8fmj1"]
+[ext_resource type="ArrayMesh" uid="uid://ca8pic0lo55xf" path="res://Models/CoolChair/Seat.res" id="2_upfdi"]
+[ext_resource type="Script" path="res://Scripts/AssemblyPoint.gd" id="3_2u4jj"]
+[ext_resource type="Texture2D" uid="uid://dh1pq43blk4y4" path="res://icon.svg" id="4_40lr4"]
+[ext_resource type="PackedScene" uid="uid://cha007ja7ycyc" path="res://Audio/unbox_sound.tscn" id="5_y5rg6"]
+[ext_resource type="PackedScene" uid="uid://cwvpjgkavhf3y" path="res://Audio/drill_sound.tscn" id="6_31fq5"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v7gup"]
+albedo_color = Color(0.427453, 0.33773, 0.228415, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ne52k"]
+material = SubResource("StandardMaterial3D_v7gup")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sdacq"]
+albedo_color = Color(0.577089, 0.801615, 0.930766, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ebhxn"]
+albedo_color = Color(0.576471, 0.8, 0.929412, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_d4yq8"]
+material = SubResource("StandardMaterial3D_ebhxn")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_c8vcv"]
+size = Vector3(0.18116, 0.239594, 0.181862)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1krf5"]
+albedo_color = Color(0.540209, 0.439413, 0.313373, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_b6w4d"]
+material = SubResource("StandardMaterial3D_1krf5")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fodde"]
+size = Vector3(1.5946, 0.742935, 3.56378)
+
+[node name="Couch" type="StaticBody3D"]
+script = ExtResource("1_8fmj1")
+
+[node name="BoxMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.68279, 0, 0, 0, 1.52829, 0, 0, 0, 3.67072, 0.0721266, 1.0241, 0.161525)
+mesh = SubResource("BoxMesh_ne52k")
+
+[node name="Label3D" type="Label3D" parent="BoxMesh"]
+transform = Transform3D(1.46368e-15, -2.53283, -4.37114e-08, -3.34851e-08, -1.10713e-07, 1, -0.76605, 0, -4.37114e-08, 0, 0.508312, 0)
+text = "Cardboard box"
+
+[node name="MainMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(-7.77818e-08, -3.95034, -2.76798e-08, -1.55564e-07, -5.18024e-07, 0.21108, -1.77944, 1.72675e-07, -1.84532e-08, -0.247319, 1.37374, 0.027327)
+mesh = ExtResource("2_upfdi")
+surface_material_override/0 = SubResource("StandardMaterial3D_sdacq")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MainMesh"]
+transform = Transform3D(2.001, 9.76996e-15, 9.02389e-13, 1.10134e-13, 0.09, -2.43329e-13, -4.54747e-13, 2.90906e-14, 4.19605, -0.0893984, -0.238509, -2.99369)
+mesh = SubResource("BoxMesh_d4yq8")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="MainMesh"]
+transform = Transform3D(0.156466, -1.42109e-14, 2.82441e-13, 1.04361e-14, 0.311663, -9.20268e-14, -2.13163e-14, 3.18771e-13, 1.57881, -1.00999, -0.0392906, -1.70219)
+mesh = SubResource("BoxMesh_d4yq8")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="MainMesh"]
+transform = Transform3D(0.156466, -1.06581e-14, 2.84217e-13, 1.04361e-14, 0.311663, -9.20268e-14, -2.13163e-14, 3.18771e-13, 1.57881, 0.833731, -0.0392906, -1.70218)
+mesh = SubResource("BoxMesh_d4yq8")
+
+[node name="AssemblyPoints" type="Node3D" parent="."]
+transform = Transform3D(1, -1.74846e-07, 0, 1.74846e-07, 1, 0, 0, 0, 1, -0.664994, -0.0435388, 0.394175)
+
+[node name="Leg1" type="StaticBody3D" parent="AssemblyPoints"]
+script = ExtResource("3_2u4jj")
+
+[node name="AssemblyCollider" type="CollisionShape3D" parent="AssemblyPoints/Leg1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.44482, 1.68678, -1.89625)
+shape = SubResource("BoxShape3D_c8vcv")
+
+[node name="AssemblyMarker" type="Sprite3D" parent="AssemblyPoints/Leg1"]
+transform = Transform3D(0.140182, 0, 0, 0, -6.04909e-09, 1, 0, -0.138387, -4.37114e-08, 1.4474, 1.6292, -1.89541)
+modulate = Color(0, 0, 0, 0.803922)
+texture = ExtResource("4_40lr4")
+
+[node name="AssembledMeshes" type="Node3D" parent="AssemblyPoints/Leg1"]
+visible = false
+
+[node name="AssembledMesh" type="MeshInstance3D" parent="AssemblyPoints/Leg1/AssembledMeshes"]
+transform = Transform3D(0.18, 0, 3.55271e-15, 0, -7.86805e-09, 0.417529, 0, -0.18, -1.82508e-08, 1.44496, 1.81146, -1.89677)
+mesh = SubResource("BoxMesh_b6w4d")
+skeleton = NodePath("../..")
+
+[node name="Leg2" type="StaticBody3D" parent="AssemblyPoints"]
+script = ExtResource("3_2u4jj")
+
+[node name="AssemblyCollider" type="CollisionShape3D" parent="AssemblyPoints/Leg2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0489682, 1.68678, -1.89677)
+shape = SubResource("BoxShape3D_c8vcv")
+
+[node name="AssemblyMarker" type="Sprite3D" parent="AssemblyPoints/Leg2"]
+transform = Transform3D(0.140182, 0, 0, 0, -6.04909e-09, 1, 0, -0.138387, -4.37114e-08, 0.0515485, 1.6292, -1.89593)
+modulate = Color(0, 0, 0, 0.803922)
+texture = ExtResource("4_40lr4")
+
+[node name="AssembledMeshes" type="Node3D" parent="AssemblyPoints/Leg2"]
+visible = false
+
+[node name="AssembledMesh" type="MeshInstance3D" parent="AssemblyPoints/Leg2/AssembledMeshes"]
+transform = Transform3D(0.18, 0, 3.55271e-15, 0, -7.86805e-09, 0.417529, 0, -0.18, -1.82508e-08, 0.0490999, 1.81146, -1.89729)
+mesh = SubResource("BoxMesh_b6w4d")
+skeleton = NodePath("../..")
+
+[node name="Leg3" type="StaticBody3D" parent="AssemblyPoints"]
+script = ExtResource("3_2u4jj")
+
+[node name="AssemblyCollider" type="CollisionShape3D" parent="AssemblyPoints/Leg3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0489682, 1.68678, 1.47869)
+shape = SubResource("BoxShape3D_c8vcv")
+
+[node name="AssemblyMarker" type="Sprite3D" parent="AssemblyPoints/Leg3"]
+transform = Transform3D(0.140182, 0, 0, 0, -6.04909e-09, 1, 0, -0.138387, -4.37114e-08, 0.0515489, 1.6292, 1.47953)
+modulate = Color(0, 0, 0, 0.803922)
+texture = ExtResource("4_40lr4")
+
+[node name="AssembledMeshes" type="Node3D" parent="AssemblyPoints/Leg3"]
+visible = false
+
+[node name="AssembledMesh" type="MeshInstance3D" parent="AssemblyPoints/Leg3/AssembledMeshes"]
+transform = Transform3D(0.18, 0, 3.55271e-15, 0, -7.86805e-09, 0.417529, 0, -0.18, -1.82508e-08, 0.0490999, 1.81146, 1.47817)
+mesh = SubResource("BoxMesh_b6w4d")
+skeleton = NodePath("../../..")
+
+[node name="Leg4" type="StaticBody3D" parent="AssemblyPoints"]
+script = ExtResource("3_2u4jj")
+
+[node name="AssemblyCollider" type="CollisionShape3D" parent="AssemblyPoints/Leg4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.44482, 1.68678, 1.47921)
+shape = SubResource("BoxShape3D_c8vcv")
+
+[node name="AssemblyMarker" type="Sprite3D" parent="AssemblyPoints/Leg4"]
+transform = Transform3D(0.140182, 0, 0, 0, -6.04909e-09, 1, 0, -0.138387, -4.37114e-08, 1.4474, 1.6292, 1.48005)
+modulate = Color(0, 0, 0, 0.803922)
+texture = ExtResource("4_40lr4")
+
+[node name="AssembledMeshes" type="Node3D" parent="AssemblyPoints/Leg4"]
+visible = false
+
+[node name="AssembledMesh" type="MeshInstance3D" parent="AssemblyPoints/Leg4/AssembledMeshes"]
+transform = Transform3D(0.18, 0, 3.55271e-15, 0, -7.86805e-09, 0.417529, 0, -0.18, -1.82508e-08, 1.44496, 1.81146, 1.47869)
+mesh = SubResource("BoxMesh_b6w4d")
+skeleton = NodePath("../../..")
+
+[node name="MainCollision" type="CollisionShape3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0824169, 1.21418, 0.188261)
+shape = SubResource("BoxShape3D_fodde")
+
+[node name="UnboxSound" parent="." instance=ExtResource("5_y5rg6")]
+
+[node name="DrillSound" parent="." instance=ExtResource("6_31fq5")]
+
+[connection signal="furniture_clicked" from="." to="." method="_on_furniture_clicked"]
+[connection signal="input_event" from="." to="." method="_on_input_event"]
